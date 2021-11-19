@@ -4,13 +4,13 @@ class HomeController < ApplicationController
     require 'net/http'
     require 'json'
 
-    @url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&CMC_PRO_API_KEY=c93b03ea-b0d3-4f24-8908-2c2ac8494af0'
+    @url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
-    @array1 = JSON.parse(@response).to_a
-    @array2 =@array1[1].to_a
+    @news = JSON.parse(@response)
+
+    @contador = 1
     
-    @coins = @array2[1].to_a
   end
 
   def precios
