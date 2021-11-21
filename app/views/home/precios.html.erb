@@ -1,2 +1,34 @@
 <h1>Página de precios</h1>
-<p>Esto se cambiará ahora</p>
+
+
+<% if @simbolo %>
+	<% if @cuota['Response'] %>
+		<p> Por favor, escriba un símbolo de criptomoneda válido</p>
+	<% else %>
+		<table class="table table-responsive table-striped table-hover table-bordered">
+		  <thead class="table-dark">
+		    <tr>
+		      <th scope="col">SÍMBOLO</th>
+		      <th scope="col">PRECIO</th>
+		      <th scope="col">V+ALTO(24H)</th>
+		      <th scope="col">V+BAJO(24H)</th>
+		      <th scope="col">MarketCap</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @cuota["DISPLAY"].each do |clave, valor| %>
+		    <tr>
+		      <th scope="row"><%= clave %></th>
+		      <td><%= valor["EUR"]["PRICE"] %></td>
+		      <td><%= valor["EUR"]["HIGHDAY"] %></td>
+		      <td><%= valor["EUR"]["LOWDAY"] %></td>
+		      <td><%= valor["EUR"]["MKTCAP"] %></td>
+		    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	<% end %>	
+<% else %>
+	<p> Por favor, escriba el símbolo de la criptomoneda a buscar</p>
+
+<% end %>
